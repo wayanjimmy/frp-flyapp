@@ -1,0 +1,25 @@
+name: Wakeup
+on:
+  schedule:
+    - cron: "0 23 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".gitea/workflows/trigger/cron-wakeup.txt"
+
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: linux-amd64
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          github-server-url: ${{ vars.GIT_SERVER_URL }}
+      - name: Setup Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Scale up
+        run: fly scale count 1
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
