@@ -10,7 +10,7 @@ proxyBindAddr = "0.0.0.0"
 # frp dashboard
 webServer.addr = "::"
 webServer.port = 8080
-webServer.user = "admin"
+webServer.user = "frp-operator"
 webServer.password = "{{ .Envs.FRP_DASHBOARD_PWD }}"
 
 # frp authentication

@@ -1,83 +1,83 @@
-kill_signal = "SIGTERM"
-kill_timeout = "2m0s"
+# fly.toml app configuration file generated for jimboy-frp on 2025-03-02T09:24:31+07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-# frp control plane
-# frp HTTP server (for dashboard or HTTP tunnel)
+app = 'jimboy-frp'
+primary_region = 'sin'
+kill_signal = 'SIGTERM'
+kill_timeout = '2m0s'
+
+[build]
+
 [http_service]
   internal_port = 8080
   force_https = true
 
   [http_service.concurrency]
-    type = "requests"
+    type = 'requests'
     hard_limit = 25
     soft_limit = 20
 
-# frp TCP server
 [[services]]
-  protocol = "tcp"
+  protocol = 'tcp'
   internal_port = 7000
 
   [[services.ports]]
     port = 7000
 
   [services.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
 
-# frp KCP server
 [[services]]
-  protocol = "udp"
+  protocol = 'udp'
   internal_port = 7000
 
   [[services.ports]]
     port = 7000
 
   [services.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
 
-# frp QUIC server
 [[services]]
-  protocol = "udp"
+  protocol = 'udp'
   internal_port = 7001
 
   [[services.ports]]
     port = 7001
 
   [services.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
 
-# frp data plane
-# frp TCP tunnel (example for Minecraft Java server)
 [[services]]
-  protocol = "tcp"
+  protocol = 'tcp'
   internal_port = 25565
 
   [[services.ports]]
     port = 25565
 
   [services.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
 
-# frp UDP tunnel (example for Minecraft Bedrock server)
 [[services]]
-  protocol = "udp"
+  protocol = 'udp'
   internal_port = 19132
 
   [[services.ports]]
     port = 19132
 
   [services.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
 
 [[vm]]
-  size = "shared-cpu-1x"
-  memory_mb = 256
+  size = 'shared-cpu-1x'
