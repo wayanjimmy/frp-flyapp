@@ -1,7 +1,7 @@
 FROM golang:alpine as build
 RUN apk add --no-cache patch
 WORKDIR frp
-ARG VERSION=0.61.1
+ARG VERSION=0.61.2
 RUN wget -qO- https://github.com/fatedier/frp/archive/refs/tags/v${VERSION}.tar.gz | tar -xz --strip-components 1
 ADD patches patches
 RUN patch -p1 < patches/udp-proxy-fly-global-services.patch
